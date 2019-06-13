@@ -1,0 +1,8 @@
+.loader-wrapper {
+    @include contentCenter;
+    
+    .spinner-border {
+        width: 5rem;
+        height: 5rem;
+    }
+}
