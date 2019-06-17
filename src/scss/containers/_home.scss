@@ -9,24 +9,34 @@
     &__img {
       display: flex;
       justify-content: space-between;
+      width: 40vw;
 
-      &-dark-phoenix {
-        width: 50rem;
-      }
+      // &-dark-phoenix {}
     }
 
     &__form {
-      @include contentCenter;
-      width: 40rem;
-      height: 20rem;
-      background-color: transparent;
-      border: 3px solid $bg-white;
-      border-radius: $border-primary;
+      width: 60vw;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
-      .form-control {
-        width: 20rem;
-        height: 4rem;
-        font-size: $text-secondary-size;
+      // &__header {}
+
+      &__content {
+        // @include contentCenter;
+        width: 40rem;
+        height: 20rem;
+        background-color: transparent;
+        border: $box-border-default;
+        border-radius: $border-radius-primary;
+        padding: $padding-primary;
+
+        .form-control {
+          width: 25rem;
+          height: 3rem;
+          font-size: $text-secondary-size;
+        }
       }
     }
   }

@@ -8,6 +8,7 @@ import {
   FIND_BY_GENRE_DONE
 } from "../../constants/actionTypes";
 import moment from "moment";
+import PropTypes from "prop-types";
 import Loader from "../../components/Loader";
 import { Form, FormGroup, Button } from "reactstrap";
 import SelectDropdown from "../../components/SelectDropdown";
@@ -39,6 +40,15 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Home extends PureComponent {
+  static propTypes = {
+    getGenre: PropTypes.func.isRequired,
+    findByGenre: PropTypes.func.isRequired,
+    allGenre: PropTypes.array,
+    getGenreInProgress: PropTypes.string,
+    foundByGenre: PropTypes.object,
+    foundByGenreInProgress: PropTypes.string
+  };
+
   state = {
     ...initState
   };
@@ -89,9 +99,14 @@ class Home extends PureComponent {
             </figure>
           </div>
           <div className="home__content__form">
-            <div className="home__content__form__top" />
+            <div className="home__content__form__header">
+              <h1 className="main-title">Movie Finder</h1>
+              <p className="description-text">
+                Pick a genre to find tonight's movie
+              </p>
+            </div>
             <Form
-              className="home__content__form__bottom"
+              className="home__content__form__content"
               onSubmit={this.handleSubmit}
             >
               <FormGroup>
@@ -100,7 +115,7 @@ class Home extends PureComponent {
                   defaultValue="Choose a genre"
                 >
                   {((allGenre || {}).genres || []).map(g => {
-                    const { id, name } = g;
+                    let { id, name } = g;
                     return (
                       <option key={id} value={id}>
                         {name}
@@ -109,7 +124,9 @@ class Home extends PureComponent {
                   })}
                 </SelectDropdown>
               </FormGroup>
-              <Button type="submit">Submit</Button>
+              <Button className="main-btn" type="submit">
+                Find movie
+              </Button>
             </Form>
           </div>
         </div>

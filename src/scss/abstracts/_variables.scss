@@ -1,17 +1,29 @@
-// Text Color
-$text-primary-color: #fff;
-
 // Color
 $bg-white: #fff;
 $bg-dark: #141516;
+$theme-main: #A52121;
+
+// Text Color
+$text-primary-color: #fff;
+$text-black-color: #000;
 
 // Font Sizes
 $text-primary-size: 1.6rem;
 $text-secondary-size: 1.4rem;
 
+$main-title-size: 6rem;
+
 // Padding
 $padding-primary: 2rem;
 
 // Border radius
-$border-primary: 1.4rem;
+$border-radius-primary: 1.4rem;
 
+// Box border
+$box-border-default: 3px solid $bg-white;
+
+// Shadows
+$button-default-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+// $button-default-hover: 0 3px 24px 0 rgba(0, 0, 0, 0.24);
+$button-hover: 0 1rem 2rem rgba($text-black-color, 0.2);
+$button-pressed: 0 0.5rem 1rem rgba($text-black-color, 0.2);

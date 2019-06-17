@@ -1,0 +1,70 @@
+//general button
+.main-btn {
+    &,
+    &:link,
+    &:visited {
+    //   font-family: Poppins;
+      font-size: $text-primary-size;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.56;
+      letter-spacing: normal;
+      text-align: center;
+      display: inline-block;
+      text-transform: uppercase;
+      color: $text-primary-color;
+      transition: all 0.2s;
+      background-color: $theme-main;
+      border: none;
+      // backface-visibility: hidden;
+    }
+  
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: $button-hover;
+      color: $text-primary-color;
+      background-color: $theme-main;
+    }
+  
+    &:active,
+    &:focus {
+      outline: none;
+      transform: translateY(-1px);
+      box-shadow: $button-pressed;
+      background-color: $theme-main;
+    }
+  
+    //rounded
+    &-round-sm {
+      border-radius: 21px;
+      box-shadow: $button-default-shadow;
+      padding: 11px 24px;
+    }
+    &-round-md {
+      border-radius: 26px;
+      box-shadow: $button-default-shadow;
+      padding: 14px 20px;
+    }
+  
+    &-round-lg {
+      border-radius: 32px;
+      box-shadow: $button-default-shadow;
+      padding: 20px 32px;
+    }
+  
+    // Rectangle
+    &-rect {
+      padding: 1.5rem;
+    }
+  
+    // Transparent
+    &-transparent {
+      background-color: transparent;
+      color: $text-primary-color;
+      border: 1px solid $text-primary-color;
+      opacity: 0.8;
+      text-transform: none;
+    }
+  }
+  
