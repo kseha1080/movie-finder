@@ -43,11 +43,6 @@ class Home extends PureComponent {
     ...initState,
   };
 
-  componentDidMount() {
-    console.log(window.scrollY);
-    window.scrollTo(0, 500);
-  }
-
   componentDidUpdate(prevProps) {
     const { movieData, searchType, moviesByQuery, pageNum } = this.props;
     const { movieList } = this.state;
