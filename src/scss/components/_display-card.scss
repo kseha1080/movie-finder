@@ -1,0 +1,83 @@
+.display-card {
+  margin-top: 4rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &__poster {
+    width: auto;
+    border: $box-border-default-theme;
+    border-radius: $border-radius-small;
+    cursor: pointer;
+    margin-right: 2.5rem;
+    position: relative;
+
+    img {
+      &:hover {
+        background-color: $bg-dark;
+        opacity: 0.2;
+      }
+    }
+
+    .info-show {
+      position: absolute;
+      text-align: center;
+      @include contentCenter;
+      width: 90%;
+
+      h4 {
+        font-size: $card-title-size;
+      }
+
+      p {
+        font-size: $text-secondary-size;
+      }
+    }
+
+    .info-hide {
+      display: none;
+    }
+  }
+
+  &__info {
+    width: 100%;
+    min-width: 50rem;
+    min-height: 25rem;
+    background-color: $text-grey-color;
+    padding: 2rem;
+
+    h4 {
+      color: $text-primary-color;
+      font-size: $card-title-size;
+    }
+
+    &__desc {
+      color: $text-primary-color;
+      font-size: $card-description-size;
+    }
+
+    &__bottom {
+      position: absolute;
+      bottom: 1.5rem;
+    }
+  }
+
+  &__heading {
+    font-size: $card-title-size;
+    color: $text-grey-color;
+  }
+
+  &__description {
+    font-size: $text-primary-size;
+    color: $text-grey-color;
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: $text-primary-color;
+  }
+
+  &:first-child {
+    margin-top: 6rem;
+  }
+}

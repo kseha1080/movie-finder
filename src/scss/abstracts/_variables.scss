@@ -1,17 +1,40 @@
-// Text Color
-$text-primary-color: #fff;
-
-// Color
+// Main Color
 $bg-white: #fff;
 $bg-dark: #141516;
+$bg-grey: #3f3e3e;
+$bg-black: #000;
+$theme-main: #a52121;
+$load-btn-color: #1D5D87;
+
+// Text Color
+$text-primary-color: #fff;
+$text-grey-color: #3f3e3e;
 
 // Font Sizes
 $text-primary-size: 1.6rem;
 $text-secondary-size: 1.4rem;
 
+$nav-header-size: 4.4rem;
+$nav-section-size: 2.8rem;
+$nav-selected-size: 3rem;
+
+$card-title-size: 2.2rem;
+$card-description-size: 1.4rem;
+
 // Padding
 $padding-primary: 2rem;
 
 // Border radius
-$border-primary: 1.4rem;
+$border-radius-primary: 1.4rem;
+$border-radius-small: 0.5rem;
 
+// Box border
+$box-border-default: 3px solid $bg-white;
+$box-border-default-theme: 3px solid $theme-main;
+$box-border-small: 1px solid $bg-white;
+
+// Shadows
+$button-default-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+$button-default-hover: 0 3px 24px 0 rgba(0, 0, 0, 0.24);
+$button-hover: 0 1rem 2rem rgba($bg-dark, 0.2);
+$button-pressed: 0 0.5rem 1rem rgba($bg-dark, 0.2);

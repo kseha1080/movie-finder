@@ -1,0 +1,26 @@
+.similar-search {
+  .field-form {
+    margin: 0 auto;
+    width: 50%;
+  }
+
+  &__search {
+    width: 50%;
+    margin: auto;
+    margin-top: 3rem;
+    
+    &-list {
+      margin: auto;
+      margin-top: 3rem;
+      cursor: pointer;
+
+      &:hover {
+        color: $theme-main;
+      }
+    }
+
+    &__not-found {
+      font-size: $text-primary-size;
+    }
+  }
+}

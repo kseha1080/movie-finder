@@ -1,14 +1,14 @@
-import { combineReducers } from "redux";
-import { routerReducer } from "react-router-redux";
-import { reducer as reduxFormReducer } from "redux-form";
-import search from "./search";
-import discover from './discover';
-import genre from './genre';
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
+import { reducer as reduxFormReducer } from 'redux-form';
+import movies from './movies';
+import async from './async';
+import searchType from './searchType';
 
 export default combineReducers({
   router: routerReducer,
   reduxForm: reduxFormReducer,
-  search,
-  discover,
-  genre,
+  async,
+  movies,
+  searchType,
 });

@@ -1,0 +1,31 @@
+.app {
+  &__body {
+    display: flex;
+    background-repeat: no-repeat;
+    background-color: $bg-black;
+
+    &__main {
+      width: 70%;
+      height: 100vh;
+      background-color: $bg-dark;
+      position: relative;
+      animation: slide 3s ease;
+      // -webkit-animation: slide 3s ease; /* Safari 2+ */
+      // -moz-animation: slide 3s ease; /* Fx 5+ */
+      // -o-animation: slide 3s ease; /* Opera 12+ */
+    }
+  }
+
+  .keanu {
+    background-image: url("../img/keanu-reeves.png");
+  }
+
+  .interstellar {
+    background-image: url("../img/interstellar.jpg");
+  }
+
+  .dunkirk {
+    background-image: url("../img/dunkirk.jpg");
+    background-position: top 0px right 200px;
+  }
+}

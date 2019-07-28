@@ -1,16 +1,25 @@
-export const ASYNC_START = "ASYNC_START";
-export const ASYNC_END = "ASYNC_END";
+export const ASYNC_START = 'ASYNC_START';
+export const ASYNC_END = 'ASYNC_END';
 
-// SEARCH
-export const GET_SEARCH = "GET_SEARCH";
-export const SEARCH_MV = "SEARCH_MV";
+// GET MOVIES
+export const GET_MOVIES_DATA = 'GET_MOVIES_DATA';
 
-// DISCOVER
-export const GET_DISCOVER = "GET_DISCOVER";
-export const DISCOVER_THEATER = "DISCOVER_THEATER";
+// GET SEARCH TYPE
+export const GET_SEARCH_TYPE = 'GET_SEARCH_TYPE';
+
+// GET PAGE NUMBER
+export const GET_PAGE_NUM = 'GET_PAGE_NUM';
+
+// GET MOVIES BY QUERY
+export const GET_MOVIES_BY_QUERY = 'GET_MOVIES_BY_QUERY';
+
+// GET MOVIE ID
+export const GET_MOVIE_ID = 'GET_MOVIE_ID';
 
 // GENRE
-export const GET_GENRE = "GET_GENRE";
-export const GET_GENRE_DONE = "GET_GENRE_DONE";
-export const FIND_BY_GENRE = "FIND_BY_GENRE";
-export const FIND_BY_GENRE_DONE = "FIND_BY_GENRE_DONE";
+export const GET_GENRE = 'GET_GENRE';
+export const FIND_BY_GENRE = 'FIND_BY_GENRE';
+
+// UNLOAD
+export const UNLOAD_MOVIES = 'UNLOAD_MOVIES';
+export const UNLOAD_SEARCHES = 'UNLOAD_SEARCHES';

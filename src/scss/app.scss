@@ -1,15 +1,20 @@
 // Abstracts
-@import './abstracts/_variables.scss';
-@import './abstracts/_mixin.scss';
+@import "./abstracts/_variables.scss";
+@import "./abstracts/_mixin.scss";
+@import "./abstracts/_animations.scss";
 
 // Base
-@import './base/_base';
-@import './base/_typography';
-@import './base/_utilities';
+@import "./base/_base";
+@import "./base/_typography";
+@import "./base/_utilities";
 
 // Containers
-@import './containers/main.scss';
-@import './containers/home.scss';
+@import "./containers/_main.scss";
+@import "./containers/_home.scss";
 
 // Components
-@import './components/loader.scss';
+@import "./components/_loader.scss";
+@import "./components/_button.scss";
+@import "./components/_display-card";
+@import "./components/_nav-side";
+@import "./components/_similar-search";
