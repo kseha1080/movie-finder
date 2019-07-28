@@ -12,6 +12,6 @@ The application allows you to choose from five different ways of finding movies 
 
 **Upcoming**
 
-Database & API's: https://www.themoviedb.org/ (TMDB)
+Database & API's: [TMDB](https://www.themoviedb.org/)
 
 [Click here to run the app](https://movie-night-react.herokuapp.com/)
