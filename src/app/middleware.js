@@ -1,29 +1,29 @@
-import { ASYNC_START, ASYNC_END } from "../constants/actionTypes";
+import { ASYNC_START, ASYNC_END } from '../constants/actionTypes';
 
-const promiseMiddleware = store => next => action => {
+export const promiseMiddleware = store => next => action => {
+  // Validate if payload is function
   if (isPromise(action.payload)) {
     store.dispatch({
       type: ASYNC_START,
       subtype: action.type,
-      isProgress: true
+      inProgress: true,
     });
-
     action.payload.then(
+      // Dispatch res to corresponding action
       res => {
         action.status = 200;
         action.payload = res;
-
         store.dispatch({
           type: ASYNC_END,
-          isProgress: false,
+          inProgress: false,
           error: false,
-          status: action.status
+          status: action.status,
         });
         store.dispatch(action);
       },
+      // catch error and dipatch to action payload
       error => {
         action.error = true;
-
         if (error.response) {
           action.status = error.response.status;
           action.payload = error.response.data;
@@ -31,26 +31,21 @@ const promiseMiddleware = store => next => action => {
           action.status = 900;
           action.payload = error;
         }
-        //get the error payload
         store.dispatch({
           type: ASYNC_END,
-          isProgress: false,
+          inProgress: false,
           payload: action.payload,
           error: true,
-          status: action.status
+          status: action.status,
         });
         store.dispatch(action);
-      }
+      },
     );
-
     return;
   }
-
   next(action);
 };
 
-function isPromise(v) {
-  return v && typeof v.then === "function";
-}
-
-export { promiseMiddleware };
+const isPromise = v => {
+  return v && typeof v.then === 'function';
+};

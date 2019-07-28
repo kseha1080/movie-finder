@@ -6,18 +6,18 @@
 }
 
 @mixin respond($breakpoint) {
-    @if $breakpoint == phone-small {
-        @media only screen and (max-width: 28.125em) { @content };    //450px
-    }
-    @if $breakpoint == phone-medium {
-        @media only screen and (max-width: 36em) { @content };    //576px
-    }
+    // @if $breakpoint == phone-small {
+    //     @media only screen and (max-width: 28.125em) { @content };    //450px
+    // }
+    // @if $breakpoint == phone-medium {
+    //     @media only screen and (max-width: 36em) { @content };    //576px
+    // }
     @if $breakpoint == phone-big {
         @media only screen and (max-width: 47.94em) { @content };    //767px
     }
-    @if $breakpoint == tab-bs4 {
-        @media only screen and (max-width: 61.94em) { @content };    //991px
-    }
+    // @if $breakpoint == tab-bs4 {
+    //     @media only screen and (max-width: 61.94em) { @content };    //991px
+    // }
     @if $breakpoint == tab-port {
         @media only screen and (max-width: 63.875em) { @content };     //1022px
     }
@@ -27,10 +27,10 @@
     @if $breakpoint == laptop-small {
         @media only screen and (max-width: 90.625em) { @content };    //1450
     }
-    @if $breakpoint == laptop-medium {
-        @media only screen and (max-width: 105em) { @content };    //1680
-    }
-    @if $breakpoint == laptop-large {
-        @media only screen and (max-width: 130em) { @content };    //1990
-    }
+    // @if $breakpoint == laptop-medium {
+    //     @media only screen and (max-width: 105em) { @content };    //1680
+    // }
+    // @if $breakpoint == laptop-large {
+    //     @media only screen and (max-width: 130em) { @content };    //1990
+    // }
 }

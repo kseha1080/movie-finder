@@ -1,135 +1,136 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import api from "../../api";
-import {
-  GET_GENRE,
-  GET_GENRE_DONE,
-  FIND_BY_GENRE,
-  FIND_BY_GENRE_DONE
-} from "../../constants/actionTypes";
-import moment from "moment";
-import PropTypes from "prop-types";
-import Loader from "../../components/Loader";
-import { Form, FormGroup, Button } from "reactstrap";
-import SelectDropdown from "../../components/SelectDropdown";
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { GET_MOVIES_DATA, GET_PAGE_NUM } from '../../constants/actionTypes';
+import api from '../../api';
+import Loader from '../../components/Loader';
+import DisplayCard from '../../components/DisplayCard';
+import LoadMoreButton from '../../components/LoadMoreButton';
+import { removeUnderscore } from '../../utils';
+import SimilarSearch from '../../components/SimilarSearch';
 
 const initState = {
-  selectedGenreId: ""
+  movieList: [],
+  selectedGenreId: '',
 };
 
-const mapStateToProps = state => ({
-  allGenre: state.genre.allGenre,
-  getGenreInProgress: state.genre.getGenreInProgress,
-  foundByGenre: state.genre.foundByGenre,
-  foundByGenreInProgress: state.genre.foundByGenreInProgress
+const mapStateToProps = (state, ownProps) => ({
+  movieData: state.movies.movieData,
+  searchType: state.searchType.searchType,
+  inProgress: state.async.inProgress,
+  pageNum: state.movies.pageNum,
+  moviesByQuery: state.movies.moviesByQuery,
+  searchMovieId: state.movies.searchMovieId,
 });
 
 const mapDispatchToProps = dispatch => ({
-  getGenre: () => {
-    dispatch({ type: GET_GENRE, payload: {} });
-    api.Genre.getGenre().then(res => {
-      dispatch({ type: GET_GENRE_DONE, payload: res });
-    });
+  getMovies: (ref, pageNum) => {
+    const payload = api.Movies.getMovies({ ref, pageNum });
+    dispatch({ type: GET_MOVIES_DATA, payload });
   },
-  findByGenre: ({ genreId, currentYear }) => {
-    dispatch({ type: FIND_BY_GENRE, payload: {} });
-    api.Genre.findByGenre({ genreId, currentYear }).then(res => {
-      dispatch({ type: FIND_BY_GENRE_DONE, payload: res });
-    });
-  }
+  getPageNum: pageNum => {
+    dispatch({ type: GET_PAGE_NUM, payload: pageNum });
+  },
+  getSimilar: ({ movieId, pageNum }) => {
+    const payload = api.Movies.getSimilar({ movieId, pageNum });
+    dispatch({ type: GET_MOVIES_DATA, payload });
+  },
 });
 
 class Home extends PureComponent {
-  static propTypes = {
-    getGenre: PropTypes.func.isRequired,
-    findByGenre: PropTypes.func.isRequired,
-    allGenre: PropTypes.array,
-    getGenreInProgress: PropTypes.string,
-    foundByGenre: PropTypes.object,
-    foundByGenreInProgress: PropTypes.string
-  };
+  static propTypes = {};
 
   state = {
-    ...initState
+    ...initState,
   };
 
   componentDidMount() {
-    // Get all genres when component mounts
-    this.props.getGenre();
+    console.log(window.scrollY);
+    window.scrollTo(0, 500);
   }
 
-  selectGenreId = e => {
-    // Set genre ID to local state
-    this.setState({
-      selectedGenreId: e.target.value
-    });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    let { selectedGenreId } = this.state,
-      // Define a variable for current year for API call
-      currentYear = moment()
-        .utc()
-        .format("YYYY");
-    // If there is no selected genre id, then stop function here
-    if (!selectedGenreId) {
-      return;
+  componentDidUpdate(prevProps) {
+    const { movieData, searchType, moviesByQuery, pageNum } = this.props;
+    const { movieList } = this.state;
+    // Validate if current and previous movie data props are different
+    if (prevProps.movieData !== movieData) {
+      // Only add the results to the movieList state if search type are same
+      if (
+        prevProps.searchType === searchType &&
+        pageNum > 1 &&
+        (movieData.results || []).length
+      ) {
+        this.setState({
+          movieList: [...movieList, ...movieData.results],
+        });
+      } else {
+        // Else validate if type is similar
+        if (searchType === 'similar') {
+          if (!Object.keys(moviesByQuery).length) {
+            this.setState({
+              movieList: movieData.results,
+            });
+          } else {
+            this.setState({
+              movieList: [],
+            });
+          }
+        } else {
+          // If not, reset the movieList state to new data
+          this.setState({
+            movieList: movieData.results,
+          });
+        }
+      }
     }
-    this.props.findByGenre({ genreId: selectedGenreId, currentYear });
-    // Redirect to main page
-    this.props.history.push("/main");
+  }
+
+  onLoadMore = () => {
+    const {
+      getMovies,
+      searchType,
+      pageNum,
+      getPageNum,
+      getSimilar,
+      searchMovieId,
+    } = this.props;
+    const newPageNum = pageNum + 1;
+    getPageNum(newPageNum);
+    if (searchType === 'similar') {
+      getSimilar({ movieId: searchMovieId, pageNum: newPageNum });
+    } else {
+      getMovies(searchType, newPageNum);
+    }
   };
 
   render() {
-    console.log(this.props, this.state);
-    const { getGenreInProgress, allGenre } = this.props;
-    if (getGenreInProgress) {
+    const { inProgress, searchType } = this.props;
+    const { movieList } = this.state;
+    const renderMovieList = (movieList || []).map((movieData, i) => {
+      return (
+        <DisplayCard key={i} data={movieData} idx={i} inProgress={inProgress} />
+      );
+    });
+    const renderLoadMoreBtn =
+      movieList && movieList.length ? (
+        <LoadMoreButton onLoadMore={this.onLoadMore} />
+      ) : null;
+    const renderSimilarSearch =
+      searchType === 'similar' ? <SimilarSearch /> : null;
+    if (inProgress) {
       return <Loader />;
     }
     return (
-      <div className="home">
-        <div className="home__content">
-          <div className="home__content__img">
-            <figure className="home__content__img-dark-phoenix">
-              <img
-                src={require("../../img/dark-phoenix.jpg")}
-                alt="Dark Phoenix"
-              />
-            </figure>
+      <div className='home'>
+        <section className='home__content'>
+          <div className='home__content__header'>
+            <h2 className='home__content__header__title'>
+              {removeUnderscore(searchType)}
+            </h2>
           </div>
-          <div className="home__content__form">
-            <div className="home__content__form__header">
-              <h1 className="main-title">Movie Finder</h1>
-              <p className="description-text">
-                Pick a genre to find tonight's movie
-              </p>
-            </div>
-            <Form
-              className="home__content__form__content"
-              onSubmit={this.handleSubmit}
-            >
-              <FormGroup>
-                <SelectDropdown
-                  onChange={this.selectGenreId}
-                  defaultValue="Choose a genre"
-                >
-                  {((allGenre || {}).genres || []).map(g => {
-                    let { id, name } = g;
-                    return (
-                      <option key={id} value={id}>
-                        {name}
-                      </option>
-                    );
-                  })}
-                </SelectDropdown>
-              </FormGroup>
-              <Button className="main-btn" type="submit">
-                Find movie
-              </Button>
-            </Form>
-          </div>
-        </div>
+          {renderSimilarSearch}
+          <div>{renderMovieList}</div>
+          <div className='home__content__load'>{renderLoadMoreBtn}</div>
+        </section>
       </div>
     );
   }
@@ -137,5 +138,5 @@ class Home extends PureComponent {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Home);

@@ -1,0 +1,69 @@
+.nav-side {
+  height: 100vh;
+  width: 40%;
+  background-color: $bg-black;
+  opacity: 0.8;
+  position: relative;
+  overflow: hidden;
+
+  &__content {
+    @include contentCenter;
+    text-align: center;
+    height: 35%;
+    width: auto;
+
+    &__header {
+      h2 {
+        font-size: $nav-header-size;
+        text-transform: uppercase;
+        text-decoration: underline;
+        margin-bottom: 4rem;
+        opacity: 0.8;
+      }
+    }
+    
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      
+      li {
+        // line-height: 3rem;
+        font-size: $nav-section-size;
+        display: flex;
+        flex-direction: column;
+        text-transform: uppercase;
+        opacity: 0.6;
+        transition: opacity 0.4s;
+
+        &:hover {
+          cursor: pointer;
+          font-size: $nav-selected-size;
+          text-decoration: line-through;
+          opacity: 1;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      p {
+        display: none;
+      }
+
+      .show-desc {
+        margin-bottom: 2rem;
+        font-size: $text-primary-size;
+        display: block;
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      .selected-list {
+        opacity: 1;
+        text-decoration: line-through;
+        font-size: $nav-selected-size;
+      }
+    }
+  }
+}
